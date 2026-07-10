@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Texo as a Service — Presentación</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0d1b1e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      user-select: none;
+    }
+
+    .slide-container {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      padding: 0 16px;
+    }
+
+    .slide-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Nav buttons */
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .nav button {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      line-height: 1;
+    }
+
+    .nav button:hover:not(:disabled) {
+      background: rgba(255,255,255,0.18);
+    }
+
+    .nav button:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .counter {
+      color: rgba(255,255,255,0.55);
+      font-size: 14px;
+      min-width: 60px;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    /* Arrow key hint */
+    .hint {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.2);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide-container">
+    <div class="slide-wrapper" id="slideWrapper">
+      <div class="slide active"><img src="slides/slide_1.png" alt="Slide 1" /></div>
+      <div class="slide"><img src="slides/slide_2.png" alt="Slide 2" /></div>
+      <div class="slide"><img src="slides/slide_3.png" alt="Slide 3" /></div>
+      <div class="slide"><img src="slides/slide_4.png" alt="Slide 4" /></div>
+      <div class="slide"><img src="slides/slide_5.png" alt="Slide 5" /></div>
+      <div class="slide"><img src="slides/slide_6.png" alt="Slide 6" /></div>
+      <div class="slide"><img src="slides/slide_7.png" alt="Slide 7" /></div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <button id="prev" disabled aria-label="Anterior">&#8592;</button>
+    <span class="counter" id="counter">1 / 7</span>
+    <button id="next" aria-label="Siguiente">&#8594;</button>
+  </nav>
+
+  <p class="hint">← → para navegar</p>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const counter = document.getElementById('counter');
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      current = n;
+      slides[current].classList.add('active');
+      counter.textContent = `${current + 1} / ${total}`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+    }
+
+    prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
+    nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { if (current < total - 1) goTo(current + 1); }
+      if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { if (current > 0) goTo(current - 1); }
+    });
+  </script>
+
+</body>
+</html>
