@@ -13,7 +13,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       user-select: none;
     }
@@ -21,17 +22,20 @@
     .slide-container {
       position: relative;
       width: 100%;
-      max-width: 1280px;
-      padding: 0 16px;
+      flex: 1;
+      min-height: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .slide-wrapper {
       position: relative;
-      width: 100%;
+      /* fill width but keep 16:9, never exceed viewport height minus nav */
+      width: min(100vw, calc((100vh - 72px) * 16 / 9));
       aspect-ratio: 16/9;
       overflow: hidden;
-      border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
     }
 
     .slide {
