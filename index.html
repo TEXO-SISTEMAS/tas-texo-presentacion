@@ -146,53 +146,65 @@
     /* ════════════════════════════════════════
        SLIDE 3 — Salud Financiera
     ════════════════════════════════════════ */
-    #s3 {
-      background: #f0ece4;
-      display: flex;
-    }
+    #s3 { background: #f0ece4; display: flex; }
     #s3 .left {
-      width: 26%;
+      width: 22%;
       background: #3d8a7a;
-      padding: 4vh 2.5vw;
+      padding: 3.5vh 2vw;
       display: flex; flex-direction: column;
+      flex-shrink: 0;
+    }
+    #s3 .mid {
+      width: 28%;
+      padding: 3vh 1.5vw 3vh 2vw;
+      display: flex; flex-direction: column; justify-content: center;
+      flex-shrink: 0;
     }
     #s3 .right {
       flex: 1;
-      padding: 3vh 2.5vw 3vh 2vw;
-      display: flex; flex-direction: column; gap: 2vh;
-      background: #f0ece4;
+      padding: 2.5vh 2vw 2.5vh 1vw;
+      display: flex; flex-direction: column; gap: 1.5vh;
     }
-    .capa-label { color: rgba(255,255,255,0.65); font-size: clamp(8px,0.75vw,11px); font-weight: 600; letter-spacing: 0.2em; margin-bottom: 0.8vh; }
-    .sidebar-title { color: #fff; font-size: clamp(16px,2vw,28px); font-weight: 800; line-height: 1.1; margin-bottom: 1.5vh; }
-    .sidebar-sub { color: rgba(255,255,255,0.8); font-size: clamp(10px,0.95vw,14px); font-weight: 600; margin-bottom: 1vh; }
-    .sidebar-body { color: rgba(255,255,255,0.65); font-size: clamp(9px,0.85vw,12px); line-height: 1.5; flex: 1; }
-    .sidebar-quote { color: #fff; font-size: clamp(10px,1vw,14px); font-weight: 700; line-height: 1.4; margin-top: auto; }
 
-    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 1vh; }
-    .bullet-list li { display: flex; gap: 1vw; align-items: flex-start; font-size: clamp(10px,0.95vw,14px); color: #2A4B5B; line-height: 1.4; }
-    .bullet-list li::before { content: '●'; color: #3d8a7a; font-size: 0.6em; margin-top: 5px; flex-shrink: 0; }
+    .capa-label { color: rgba(255,255,255,0.65); font-size: clamp(8px,0.75vw,11px); font-weight: 600; letter-spacing: 0.2em; margin-bottom: 0.8vh; }
+    .sidebar-title { color: #fff; font-size: clamp(14px,1.8vw,26px); font-weight: 800; line-height: 1.1; margin-bottom: 1.5vh; }
+    .sidebar-sub { color: rgba(255,255,255,0.8); font-size: clamp(9px,0.9vw,13px); font-weight: 600; margin-bottom: 1vh; }
+    .sidebar-body { color: rgba(255,255,255,0.65); font-size: clamp(8px,0.8vw,12px); line-height: 1.5; flex: 1; }
+    .sidebar-quote { color: #fff; font-size: clamp(9px,0.9vw,13px); font-weight: 700; line-height: 1.4; margin-top: auto; }
+
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 0.9vh; }
+    .bullet-list li { display: flex; gap: 0.8vw; align-items: flex-start; font-size: clamp(9px,0.85vw,13px); color: #2A4B5B; line-height: 1.4; }
+    .bullet-list li::before { content: '●'; color: #3d8a7a; font-size: 0.55em; margin-top: 5px; flex-shrink: 0; }
     .bullet-list b { font-weight: 700; }
-    .screenshots { display: flex; flex-direction: column; gap: 1.5vh; flex: 1; }
-    .screenshots img { width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); flex: 1; object-fit: cover; object-position: top; }
+    .screenshots { display: flex; flex-direction: column; gap: 1vh; flex: 1; min-height: 0; }
+    .screenshots img { width: 100%; border-radius: 6px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); flex: 1; min-height: 0; object-fit: cover; object-position: top left; }
 
     /* ════════════════════════════════════════
        SLIDE 4 — Inteligencia de Marketing
     ════════════════════════════════════════ */
     #s4 { background: #f0ece4; display: flex; }
     #s4 .left {
-      width: 26%;
+      width: 22%;
       background: #EDC54D;
-      padding: 4vh 2.5vw;
+      padding: 3.5vh 2vw;
       display: flex; flex-direction: column;
+      flex-shrink: 0;
     }
     #s4 .left .capa-label { color: rgba(0,0,0,0.5); }
     #s4 .left .sidebar-title { color: #2A4B5B; }
     #s4 .left .sidebar-sub { color: rgba(0,0,0,0.65); }
     #s4 .left .sidebar-body { color: rgba(0,0,0,0.55); }
     #s4 .left .sidebar-quote { color: #2A4B5B; }
+    #s4 .mid {
+      width: 28%;
+      padding: 3vh 1.5vw 3vh 2vw;
+      display: flex; flex-direction: column; justify-content: center;
+      flex-shrink: 0;
+    }
     #s4 .right {
-      flex: 1; padding: 3vh 2.5vw 3vh 2vw;
-      display: flex; flex-direction: column; gap: 2vh;
+      flex: 1;
+      padding: 2.5vh 2vw 2.5vh 1vw;
+      display: flex; flex-direction: column; gap: 1.5vh;
     }
     #s4 .bullet-list li::before { color: #EDC54D; }
 
@@ -385,7 +397,7 @@
       <div class="sidebar-quote">El grupo ahora tiene un lugar donde verse a sí mismo.</div>
       <div class="brand-tag">IMPULSADOS PARA CONECTAR</div>
     </div>
-    <div class="right">
+    <div class="mid">
       <ul class="bullet-list">
         <li><span><b>Score Grupal 0–10</b> visible al entrar: el estado real del holding en un número, con color.</span></li>
         <li><span><b>4 preguntas CEO</b> respondidas automáticamente en el hero, sin que nadie tenga que interpretarlas.</span></li>
@@ -394,9 +406,11 @@
         <li><span><b>Estado claro por agencia:</b> SANA · DEP. 3709 · BAJO MARGEN · INTERVENIR.</span></li>
         <li><span><b>Asistente IA integrado:</b> respondé cualquier pregunta sobre los datos en lenguaje natural.</span></li>
       </ul>
+    </div>
+    <div class="right">
       <div class="screenshots">
-        <img src="slides/s3_top.png" alt="Dashboard Salud Financiera" />
-        <img src="slides/s3_bot.png" alt="Gráficos EBITDA" />
+        <img src="slides/s3_a.png" alt="Dashboard Salud Financiera" />
+        <img src="slides/s3_b.png" alt="Gráficos EBITDA" />
       </div>
     </div>
   </div>
@@ -411,7 +425,7 @@
       <div class="sidebar-quote">El grupo deja de reaccionar al mercado y empieza a leerlo antes.</div>
       <div class="brand-tag" style="color:rgba(0,0,0,0.25)">IMPULSADOS PARA CONECTAR</div>
     </div>
-    <div class="right" style="background:#f0ece4; padding: 3vh 2.5vw 3vh 2vw; display:flex; flex-direction:column; gap:2vh;">
+    <div class="mid">
       <ul class="bullet-list">
         <li><span><b>Mapa del Holding:</b> las 6 empresas del grupo, sus redes globales (WPP, Publicis, Omnicom, IPG, DAN), especialidades, clientes e insight estratégico de cada una.</span></li>
         <li><span><b>Mercado Publicitario PY 2024:</b> US$144.3M totales, +6.5% vs 2023. Digital lidera con 38.5%, OOH crece, TV en contracción.</span></li>
@@ -420,9 +434,11 @@
         <li><span><b>Briefing de Redes Globales:</b> qué pasa en WPP, Publicis, Omnicom+IPG y DAN.</span></li>
         <li><span><b>Asistente IA:</b> consultá sobre el holding, el mercado o la competencia en lenguaje natural.</span></li>
       </ul>
+    </div>
+    <div class="right">
       <div class="screenshots">
-        <img src="slides/s4_top.png" alt="Mapa del Holding" />
-        <img src="slides/s4_bot.png" alt="Alertas Estratégicas" />
+        <img src="slides/s4_a.png" alt="Mapa del Holding" />
+        <img src="slides/s4_b.png" alt="Alertas Estratégicas" />
       </div>
     </div>
   </div>
