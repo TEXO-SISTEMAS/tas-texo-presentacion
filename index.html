@@ -97,11 +97,12 @@
     #s1 .subtitle { color: rgba(255,255,255,0.75); font-size: clamp(14px,1.5vw,20px); font-weight: 300; }
 
     #s1 .footer {
-      display: flex; justify-content: flex-end;
+      display: flex; justify-content: flex-start; gap: 4vw;
       position: relative; z-index: 1;
     }
-    #s1 .credits { text-align: right; color: rgba(255,255,255,0.7); font-size: clamp(10px,0.9vw,13px); line-height: 1.8; }
-    #s1 .credits b { font-weight: 600; }
+    #s1 .credit-item { display: flex; flex-direction: column; gap: 2px; }
+    #s1 .credit-label { color: rgba(255,255,255,0.9); font-size: clamp(10px,0.9vw,13px); font-weight: 700; }
+    #s1 .credit-value { color: rgba(255,255,255,0.55); font-size: clamp(10px,0.9vw,13px); font-weight: 400; }
 
     /* ════════════════════════════════════════
        SLIDE 2 — El Problema
@@ -346,10 +347,17 @@
       <div class="subtitle">Cómo construimos un sistema viable de decisión para el Holding TEXO</div>
     </div>
     <div class="footer">
-      <div class="credits">
-        <div><b>Líder del proyecto:</b> Alejandro Rolandi</div>
-        <div><b>Equipo:</b> Danilo Sosa · David Medina</div>
-        <div><b>Fase actual:</b> De MVP a Plataforma — Expansión de capas en curso</div>
+      <div class="credit-item">
+        <span class="credit-label">Líder del proyecto</span>
+        <span class="credit-value">Alejandro Rolandi</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-label">Equipo</span>
+        <span class="credit-value">Danilo Sosa · David Medina</span>
+      </div>
+      <div class="credit-item">
+        <span class="credit-label">Fase actual</span>
+        <span class="credit-value">MVP — Salud Financiera del Holding</span>
       </div>
     </div>
   </div>
