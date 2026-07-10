@@ -32,9 +32,8 @@
 
     .slide-wrapper {
       position: relative;
-      /* fill width but keep 16:9, never exceed viewport height minus nav */
-      width: min(100vw, calc((100vh - 72px) * 16 / 9));
-      aspect-ratio: 16/9;
+      width: 100vw;
+      height: calc(100vh - 60px);
       overflow: hidden;
     }
 
