@@ -5,110 +5,549 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Texo as a Service — Presentación</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #000;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #111;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       user-select: none;
     }
 
-    /* Slide ocupa TODA la pantalla */
+    /* ── Slide base ── */
     .slide {
       position: fixed;
       inset: 0;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
       pointer-events: none;
+      overflow: hidden;
     }
+    .slide.active { opacity: 1; pointer-events: auto; }
 
-    .slide.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .slide img {
-      width: 100vw;
-      height: 100vh;
-      object-fit: contain;
-      display: block;
-    }
-
-    /* Nav superpuesto abajo al centro */
+    /* ── Nav ── */
     .nav {
       position: fixed;
-      bottom: 24px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
-      gap: 16px;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.12);
+      gap: 14px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 40px;
-      padding: 8px 20px;
-      z-index: 100;
+      padding: 7px 18px;
+      z-index: 1000;
     }
-
     .nav button {
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.2);
       color: #fff;
-      width: 38px;
-      height: 38px;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s;
-      line-height: 1;
+    }
+    .nav button:hover:not(:disabled) { background: rgba(255,255,255,0.28); }
+    .nav button:disabled { opacity: 0.2; cursor: default; }
+    .counter { color: rgba(255,255,255,0.7); font-size: 12px; min-width: 44px; text-align: center; letter-spacing: 0.08em; }
+
+    /* ════════════════════════════════════════
+       SLIDE 1 — Cover
+    ════════════════════════════════════════ */
+    #s1 {
+      background: linear-gradient(135deg, #1a3a45 0%, #2c5c6e 50%, #1e4a55 100%);
+      display: flex;
+      flex-direction: column;
+      padding: 4vh 5vw;
+    }
+    #s1 .circle-tr {
+      position: absolute; top: -8vh; right: -4vw;
+      width: 30vw; height: 30vw;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    #s1 .circle-bl {
+      position: absolute; bottom: -6vh; left: -3vw;
+      width: 25vw; height: 25vw;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+    }
+    #s1 .top-bar {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      position: relative; z-index: 1;
+    }
+    #s1 .logo {
+      display: flex; align-items: center; gap: 10px;
+    }
+    #s1 .logo-icon {
+      width: 36px; height: 36px; border: 2px solid rgba(255,255,255,0.7); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 700;
+    }
+    #s1 .logo-text { color: rgba(255,255,255,0.85); font-size: clamp(14px,1.5vw,18px); font-weight: 700; letter-spacing: 0.15em; }
+    #s1 .logo-sub { color: rgba(255,255,255,0.5); font-size: clamp(8px,0.7vw,10px); letter-spacing: 0.2em; margin-top: 1px; }
+    #s1 .project-tag { color: rgba(255,255,255,0.45); font-size: clamp(9px,0.8vw,11px); letter-spacing: 0.2em; text-align: right; margin-top: 4px; }
+
+    #s1 .body { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
+    #s1 .eyebrow { color: #EDC54D; font-size: clamp(10px,1vw,13px); font-weight: 700; letter-spacing: 0.25em; margin-bottom: 1.2vh; }
+    #s1 .title { color: #fff; font-size: clamp(36px,6.5vw,88px); font-weight: 900; line-height: 1; letter-spacing: -0.02em; margin-bottom: 3vh; }
+    #s1 .subtitle { color: rgba(255,255,255,0.75); font-size: clamp(14px,1.5vw,20px); font-weight: 300; }
+
+    #s1 .footer {
+      display: flex; justify-content: flex-end;
+      position: relative; z-index: 1;
+    }
+    #s1 .credits { text-align: right; color: rgba(255,255,255,0.7); font-size: clamp(10px,0.9vw,13px); line-height: 1.8; }
+    #s1 .credits b { font-weight: 600; }
+
+    /* ════════════════════════════════════════
+       SLIDE 2 — El Problema
+    ════════════════════════════════════════ */
+    #s2 {
+      background: #f0ece4;
+      display: flex; flex-direction: column;
+      padding: 5vh 5vw;
+    }
+    #s2 .eyebrow { color: #C0554A; font-size: clamp(9px,0.85vw,12px); font-weight: 700; letter-spacing: 0.25em; margin-bottom: 1vh; }
+    #s2 .title { color: #2A4B5B; font-size: clamp(22px,3.5vw,48px); font-weight: 800; margin-bottom: 1.5vh; line-height: 1.1; }
+    #s2 .subtitle { color: #2A4B5B; font-size: clamp(11px,1.1vw,16px); opacity: 0.75; margin-bottom: 3vh; }
+
+    #s2 .cards {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5vw; flex: 1;
+    }
+    #s2 .card {
+      background: #fff; border-radius: 4px; padding: 3vh 2vw;
+      display: flex; flex-direction: column; gap: 1vh;
+      border-top: 4px solid;
+    }
+    #s2 .card:nth-child(1) { border-color: #3d8a7a; }
+    #s2 .card:nth-child(2) { border-color: #EDC54D; }
+    #s2 .card:nth-child(3) { border-color: #C0554A; }
+    #s2 .card:nth-child(4) { border-color: #2A4B5B; }
+    #s2 .card-num { font-size: clamp(22px,2.5vw,36px); font-weight: 800; opacity: 0.9; }
+    #s2 .card:nth-child(1) .card-num { color: #3d8a7a; }
+    #s2 .card:nth-child(2) .card-num { color: #EDC54D; }
+    #s2 .card:nth-child(3) .card-num { color: #C0554A; }
+    #s2 .card:nth-child(4) .card-num { color: #2A4B5B; }
+    #s2 .card-title { color: #2A4B5B; font-size: clamp(12px,1.2vw,17px); font-weight: 700; }
+    #s2 .card-body { color: #2A4B5B; font-size: clamp(10px,0.95vw,14px); opacity: 0.7; line-height: 1.5; }
+
+    #s2 .footer-text {
+      margin-top: 2.5vh;
+      color: #2A4B5B; font-size: clamp(9px,0.85vw,13px); opacity: 0.6;
+      display: flex; justify-content: space-between; align-items: flex-end;
+    }
+    #s2 .footer-text b { opacity: 1; }
+    #s2 .brand { font-size: clamp(9px,0.75vw,11px); font-weight: 700; letter-spacing: 0.2em; opacity: 0.5; }
+
+    /* ════════════════════════════════════════
+       SLIDE 3 — Salud Financiera
+    ════════════════════════════════════════ */
+    #s3 {
+      background: #f0ece4;
+      display: flex;
+    }
+    #s3 .left {
+      width: 26%;
+      background: #3d8a7a;
+      padding: 4vh 2.5vw;
+      display: flex; flex-direction: column;
+    }
+    #s3 .right {
+      flex: 1;
+      padding: 3vh 2.5vw 3vh 2vw;
+      display: flex; flex-direction: column; gap: 2vh;
+      background: #f0ece4;
+    }
+    .capa-label { color: rgba(255,255,255,0.65); font-size: clamp(8px,0.75vw,11px); font-weight: 600; letter-spacing: 0.2em; margin-bottom: 0.8vh; }
+    .sidebar-title { color: #fff; font-size: clamp(16px,2vw,28px); font-weight: 800; line-height: 1.1; margin-bottom: 1.5vh; }
+    .sidebar-sub { color: rgba(255,255,255,0.8); font-size: clamp(10px,0.95vw,14px); font-weight: 600; margin-bottom: 1vh; }
+    .sidebar-body { color: rgba(255,255,255,0.65); font-size: clamp(9px,0.85vw,12px); line-height: 1.5; flex: 1; }
+    .sidebar-quote { color: #fff; font-size: clamp(10px,1vw,14px); font-weight: 700; line-height: 1.4; margin-top: auto; }
+
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 1vh; }
+    .bullet-list li { display: flex; gap: 1vw; align-items: flex-start; font-size: clamp(10px,0.95vw,14px); color: #2A4B5B; line-height: 1.4; }
+    .bullet-list li::before { content: '●'; color: #3d8a7a; font-size: 0.6em; margin-top: 5px; flex-shrink: 0; }
+    .bullet-list b { font-weight: 700; }
+    .screenshots { display: flex; flex-direction: column; gap: 1.5vh; flex: 1; }
+    .screenshots img { width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); flex: 1; object-fit: cover; object-position: top; }
+
+    /* ════════════════════════════════════════
+       SLIDE 4 — Inteligencia de Marketing
+    ════════════════════════════════════════ */
+    #s4 { background: #f0ece4; display: flex; }
+    #s4 .left {
+      width: 26%;
+      background: #EDC54D;
+      padding: 4vh 2.5vw;
+      display: flex; flex-direction: column;
+    }
+    #s4 .left .capa-label { color: rgba(0,0,0,0.5); }
+    #s4 .left .sidebar-title { color: #2A4B5B; }
+    #s4 .left .sidebar-sub { color: rgba(0,0,0,0.65); }
+    #s4 .left .sidebar-body { color: rgba(0,0,0,0.55); }
+    #s4 .left .sidebar-quote { color: #2A4B5B; }
+    #s4 .right {
+      flex: 1; padding: 3vh 2.5vw 3vh 2vw;
+      display: flex; flex-direction: column; gap: 2vh;
+    }
+    #s4 .bullet-list li::before { color: #EDC54D; }
+
+    /* ════════════════════════════════════════
+       SLIDE 5 — AdLens
+    ════════════════════════════════════════ */
+    #s5 {
+      background: #2A4B5B;
+      display: flex;
+      padding: 4vh 4vw;
+      gap: 3vw;
+    }
+    #s5 .left {
+      width: 30%;
+      display: flex; flex-direction: column; gap: 1.5vh;
+    }
+    #s5 .eyebrow { color: #EDC54D; font-size: clamp(9px,0.8vw,11px); font-weight: 700; letter-spacing: 0.25em; }
+    #s5 .title { color: #fff; font-size: clamp(18px,2.2vw,30px); font-weight: 800; line-height: 1.1; margin-bottom: 0.5vh; }
+    #s5 .feature-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.8vw; flex: 1;
+    }
+    #s5 .feat {
+      background: rgba(255,255,255,0.07);
+      border-left: 3px solid rgba(255,255,255,0.2);
+      padding: 1.2vh 1vw;
+      border-radius: 3px;
+    }
+    #s5 .feat.highlight {
+      background: #EDC54D;
+      border-left-color: #EDC54D;
+    }
+    #s5 .feat-title { color: rgba(255,255,255,0.9); font-size: clamp(10px,0.9vw,13px); font-weight: 700; margin-bottom: 0.3vh; }
+    #s5 .feat.highlight .feat-title { color: #2A4B5B; }
+    #s5 .feat-body { color: rgba(255,255,255,0.55); font-size: clamp(8px,0.75vw,11px); line-height: 1.4; }
+    #s5 .feat.highlight .feat-body { color: rgba(0,0,0,0.7); font-weight: 600; }
+
+    #s5 .right {
+      flex: 1; display: flex; align-items: center;
+    }
+    #s5 .right img {
+      width: 100%; border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
     }
 
-    .nav button:hover:not(:disabled) {
-      background: rgba(255,255,255,0.25);
+    /* ════════════════════════════════════════
+       SLIDE 6 — Estado Actual
+    ════════════════════════════════════════ */
+    #s6 {
+      background: #f0ece4;
+      display: flex; flex-direction: column;
+      padding: 6vh 7vw;
+      justify-content: center;
     }
+    #s6 .eyebrow { color: #C0554A; font-size: clamp(9px,0.85vw,12px); font-weight: 700; letter-spacing: 0.25em; margin-bottom: 1.5vh; }
+    #s6 .title { color: #2A4B5B; font-size: clamp(24px,3.8vw,52px); font-weight: 800; margin-bottom: 4vh; }
 
-    .nav button:disabled {
-      opacity: 0.2;
-      cursor: default;
+    #s6 .rows { display: flex; flex-direction: column; gap: 1.5vh; margin-bottom: 5vh; }
+    #s6 .row {
+      display: flex; align-items: center; gap: 2vw;
+      background: #fff; border-radius: 6px; padding: 2.2vh 2vw;
+      border-left: 5px solid;
     }
+    #s6 .row:nth-child(1) { border-color: #3d8a7a; }
+    #s6 .row:nth-child(2) { border-color: #EDC54D; }
+    #s6 .row:nth-child(3) { border-color: #C0554A; }
+    #s6 .check {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: #3d8a7a; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #fff; font-size: 14px; font-weight: 900;
+    }
+    #s6 .row-text { color: #2A4B5B; font-size: clamp(12px,1.2vw,17px); }
+    #s6 .row-text b { font-weight: 700; }
+    #s6 .row-text em { font-style: normal; }
 
-    .counter {
-      color: rgba(255,255,255,0.7);
-      font-size: 13px;
-      min-width: 50px;
-      text-align: center;
-      letter-spacing: 0.06em;
+    #s6 .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+    #s6 .url-block { color: #2A4B5B; font-size: clamp(11px,1.1vw,16px); opacity: 0.75; max-width: 50%; line-height: 1.6; }
+    #s6 .url-block a { color: #C0554A; font-weight: 600; text-decoration: none; }
+    #s6 .qr-block { display: flex; align-items: flex-end; gap: 1.5vw; }
+    #s6 .qr-block img { width: clamp(80px,8vw,120px); border-radius: 4px; }
+    #s6 .qr-label { color: #2A4B5B; font-size: clamp(9px,0.8vw,12px); font-weight: 700; letter-spacing: 0.15em; opacity: 0.5; text-align: right; }
+
+    /* ════════════════════════════════════════
+       SLIDE 7 — Qué Sigue
+    ════════════════════════════════════════ */
+    #s7 { display: flex; }
+    #s7 .left {
+      width: 35%;
+      background: #f0ece4;
+      padding: 5vh 3vw;
+      display: flex; flex-direction: column; gap: 1.5vh;
     }
+    #s7 .right {
+      flex: 1;
+      background: #2A4B5B;
+      padding: 5vh 3.5vw;
+      display: flex; flex-direction: column; justify-content: center; gap: 2vh;
+    }
+    #s7 .eyebrow-l { color: #EDC54D; font-size: clamp(9px,0.8vw,11px); font-weight: 700; letter-spacing: 0.25em; }
+    #s7 .title-l { color: #2A4B5B; font-size: clamp(20px,2.8vw,38px); font-weight: 800; }
+    #s7 .body-l { color: #2A4B5B; font-size: clamp(11px,1vw,15px); opacity: 0.7; line-height: 1.5; }
+    #s7 .check-item { display: flex; gap: 1.2vw; align-items: flex-start; }
+    #s7 .check-box {
+      width: 22px; height: 22px; border-radius: 5px;
+      background: #3d8a7a; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #fff; font-size: 11px; margin-top: 2px;
+    }
+    #s7 .check-text { color: #2A4B5B; font-size: clamp(10px,1vw,14px); line-height: 1.5; }
+    #s7 .check-text b { font-weight: 700; }
+
+    #s7 .eyebrow-r { color: #EDC54D; font-size: clamp(9px,0.8vw,11px); font-weight: 700; letter-spacing: 0.25em; }
+    #s7 .title-r { color: #fff; font-size: clamp(18px,2.2vw,30px); font-weight: 800; line-height: 1.2; }
+    #s7 .body-r { color: rgba(255,255,255,0.7); font-size: clamp(10px,0.95vw,14px); line-height: 1.5; }
+    #s7 .quote {
+      border-left: 3px solid rgba(255,255,255,0.3);
+      padding: 1.5vh 1.5vw;
+      background: rgba(255,255,255,0.07);
+      border-radius: 3px;
+    }
+    #s7 .quote p { color: rgba(255,255,255,0.8); font-size: clamp(10px,0.95vw,14px); line-height: 1.6; }
+    #s7 .quote b { color: #fff; font-weight: 700; }
+
+    .brand-tag { color: rgba(255,255,255,0.3); font-size: clamp(8px,0.7vw,10px); font-weight: 700; letter-spacing: 0.2em; margin-top: auto; text-align: right; }
   </style>
 </head>
 <body>
 
-  <div class="slide active"><img src="slides/slide_1.png" alt="Slide 1" /></div>
-  <div class="slide"><img src="slides/slide_2.png" alt="Slide 2" /></div>
-  <div class="slide"><img src="slides/slide_3.png" alt="Slide 3" /></div>
-  <div class="slide"><img src="slides/slide_4.png" alt="Slide 4" /></div>
-  <div class="slide"><img src="slides/slide_5.png" alt="Slide 5" /></div>
-  <div class="slide"><img src="slides/slide_6.png" alt="Slide 6" /></div>
-  <div class="slide"><img src="slides/slide_7.png" alt="Slide 7" /></div>
+  <!-- ══ SLIDE 1 ══ -->
+  <div class="slide active" id="s1">
+    <div class="circle-tr"></div>
+    <div class="circle-bl"></div>
+    <div class="top-bar">
+      <div class="logo">
+        <div class="logo-icon">T</div>
+        <div>
+          <div class="logo-text">TEXO</div>
+          <div class="logo-sub">IMPULSADOS PARA CONECTAR</div>
+        </div>
+      </div>
+      <div class="project-tag">PROYECTO INSTITUCIONAL · TEXO 2026</div>
+    </div>
+    <div class="body">
+      <div class="eyebrow">ACTUALIZACIÓN INTERNA</div>
+      <div class="title">TEXO AS A SERVICE</div>
+      <div class="subtitle">Cómo construimos un sistema viable de decisión para el Holding TEXO</div>
+    </div>
+    <div class="footer">
+      <div class="credits">
+        <div><b>Líder del proyecto:</b> Alejandro Rolandi</div>
+        <div><b>Equipo:</b> Danilo Sosa · David Medina</div>
+        <div><b>Fase actual:</b> De MVP a Plataforma — Expansión de capas en curso</div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ══ SLIDE 2 ══ -->
+  <div class="slide" id="s2">
+    <div class="eyebrow">EL PROBLEMA</div>
+    <div class="title">Lo que la versión anterior no podía responder</div>
+    <div class="subtitle">El primer MVP mostraba datos. Lo que un CEO necesita son respuestas. Estas cuatro no estaban:</div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-num">01</div>
+        <div class="card-title">¿Estamos sanos?</div>
+        <div class="card-body">¿El grupo gana o pierde dinero?</div>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <div class="card-title">¿Dónde está el riesgo?</div>
+        <div class="card-body">¿Quién depende demasiado de algo?</div>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <div class="card-title">¿Dónde está el potencial?</div>
+        <div class="card-body">¿Quién está escalando bien?</div>
+      </div>
+      <div class="card">
+        <div class="card-num">04</div>
+        <div class="card-title">¿Dónde intervenir?</div>
+        <div class="card-body">¿Qué necesita atención hoy?</div>
+      </div>
+    </div>
+    <div class="footer-text">
+      <span>Los datos existían pero llegaban sin narrativa, sin jerarquía y sin alertas. Era un informe para el contador, no una<br>herramienta para decidir. <b>Hoy esas brechas están cerradas.</b></span>
+      <span class="brand">IMPULSADOS PARA CONECTAR</span>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 3 ══ -->
+  <div class="slide" id="s3">
+    <div class="left">
+      <div class="capa-label">CAPA 01</div>
+      <div class="sidebar-title">Salud Financiera</div>
+      <div class="sidebar-sub">De la planilla al veredicto ejecutivo.</div>
+      <div class="sidebar-body">Ya no hace falta saber leer un Excel para entender si el grupo está bien o mal. La plataforma lo dice sola.</div>
+      <div class="sidebar-quote">El grupo ahora tiene un lugar donde verse a sí mismo.</div>
+      <div class="brand-tag">IMPULSADOS PARA CONECTAR</div>
+    </div>
+    <div class="right">
+      <ul class="bullet-list">
+        <li><span><b>Score Grupal 0–10</b> visible al entrar: el estado real del holding en un número, con color.</span></li>
+        <li><span><b>4 preguntas CEO</b> respondidas automáticamente en el hero, sin que nadie tenga que interpretarlas.</span></li>
+        <li><span><b>Alertas automáticas</b> clasificadas por severidad: riesgo fiscal, agencia en pérdida, concentración peligrosa, oportunidad de escala.</span></li>
+        <li><span><b>Narrativa ejecutiva</b> por sección: cada gráfico tiene contexto, no solo números.</span></li>
+        <li><span><b>Estado claro por agencia:</b> SANA · DEP. 3709 · BAJO MARGEN · INTERVENIR.</span></li>
+        <li><span><b>Asistente IA integrado:</b> respondé cualquier pregunta sobre los datos en lenguaje natural.</span></li>
+      </ul>
+      <div class="screenshots">
+        <img src="slides/s3_top.png" alt="Dashboard Salud Financiera" />
+        <img src="slides/s3_bot.png" alt="Gráficos EBITDA" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 4 ══ -->
+  <div class="slide" id="s4">
+    <div class="left">
+      <div class="capa-label">CAPA 02</div>
+      <div class="sidebar-title">Inteligencia de Marketing</div>
+      <div class="sidebar-sub">Saber dónde estamos parados en el mercado.</div>
+      <div class="sidebar-body">Más allá de las finanzas internas, el grupo necesitaba entender su posición competitiva. Esta capa lo resuelve.</div>
+      <div class="sidebar-quote">El grupo deja de reaccionar al mercado y empieza a leerlo antes.</div>
+      <div class="brand-tag" style="color:rgba(0,0,0,0.25)">IMPULSADOS PARA CONECTAR</div>
+    </div>
+    <div class="right" style="background:#f0ece4; padding: 3vh 2.5vw 3vh 2vw; display:flex; flex-direction:column; gap:2vh;">
+      <ul class="bullet-list">
+        <li><span><b>Mapa del Holding:</b> las 6 empresas del grupo, sus redes globales (WPP, Publicis, Omnicom, IPG, DAN), especialidades, clientes e insight estratégico de cada una.</span></li>
+        <li><span><b>Mercado Publicitario PY 2024:</b> US$144.3M totales, +6.5% vs 2023. Digital lidera con 38.5%, OOH crece, TV en contracción.</span></li>
+        <li><span><b>Noticias de la industria</b> en tiempo real: Paraguay y redes globales, actualizadas automáticamente.</span></li>
+        <li><span><b>Alertas Estratégicas con IA:</b> tensiones, oportunidades y riesgos del holding, analizados y escritos por IA, actualizables a pedido.</span></li>
+        <li><span><b>Briefing de Redes Globales:</b> qué pasa en WPP, Publicis, Omnicom+IPG y DAN.</span></li>
+        <li><span><b>Asistente IA:</b> consultá sobre el holding, el mercado o la competencia en lenguaje natural.</span></li>
+      </ul>
+      <div class="screenshots">
+        <img src="slides/s4_top.png" alt="Mapa del Holding" />
+        <img src="slides/s4_bot.png" alt="Alertas Estratégicas" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 5 ══ -->
+  <div class="slide" id="s5">
+    <div class="left">
+      <div class="eyebrow">CAPA 03 · ADLENS</div>
+      <div class="title">El mercado publicitario de Paraguay, en tiempo real</div>
+      <div class="feature-grid">
+        <div class="feat">
+          <div class="feat-title">Overview</div>
+          <div class="feat-body">Inversión total, Market Maturity Index, mix de medios, top anunciantes.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-title">MKT Wheel</div>
+          <div class="feat-body">Madurez de marketing por segmento en 5 dimensiones.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-title">Medios</div>
+          <div class="feat-body">Inversión por canal, vehículo y cluster de anunciante.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-title">Agencias</div>
+          <div class="feat-body">Share de mercado por agencia y participación por segmento.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-title">Segmentador</div>
+          <div class="feat-body">Filtrá por cualquier combinación de dimensiones, en tiempo real.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-title">Termómetro</div>
+          <div class="feat-body">Madurez de cualquier anunciante: 5 dimensiones + 21 sub-métricas.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-title">Trade</div>
+          <div class="feat-body">Inversión en Punto de Venta por anunciante y agencia trade.</div>
+        </div>
+        <div class="feat highlight">
+          <div class="feat-title">No es un reporte.</div>
+          <div class="feat-body">Es inteligencia de mercado disponible en cualquier momento.</div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <img src="slides/s5_screen.png" alt="AdLens Dashboard" />
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 6 ══ -->
+  <div class="slide" id="s6">
+    <div class="eyebrow">ESTADO ACTUAL</div>
+    <div class="title">Tres capas operativas. Una sola plataforma.</div>
+    <div class="rows">
+      <div class="row">
+        <div class="check">✓</div>
+        <div class="row-text"><b>Capa 01 · Salud Financiera</b> — El holding se ve a sí mismo.</div>
+      </div>
+      <div class="row">
+        <div class="check">✓</div>
+        <div class="row-text"><b>Capa 02 · Inteligencia de Marketing</b> — El grupo lee el mercado.</div>
+      </div>
+      <div class="row">
+        <div class="check">✓</div>
+        <div class="row-text"><b>Capa 03 · AdLens</b> — El mercado publicitario en tiempo real.</div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="url-block">
+        Disponible ahora en <a href="#">texo-as-a-service.vercel.app</a> Sin instalación. Sin planillas. Sin depender de que alguien lo interprete.
+      </div>
+      <div class="qr-block">
+        <div class="qr-label">ESCANEÁ<br>PARA<br>ACCEDER</div>
+        <img src="slides/slide_6.png" alt="QR" style="width:100px; object-fit:none; object-position:-1060px -570px; height:100px; border-radius:4px;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SLIDE 7 ══ -->
+  <div class="slide" id="s7">
+    <div class="left">
+      <div class="eyebrow-l">QUÉ SIGUE</div>
+      <div class="title-l">Completar el mapa</div>
+      <div class="body-l">Las capas de mayor impacto ya están construidas y funcionando. Queda una por resolver.</div>
+      <div class="check-item">
+        <div class="check-box">✓</div>
+        <div class="check-text"><b>Capa 02 · Datos Macro del Mercado</b> (AdLens) — segmentación, K-means, PCA.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-box">✓</div>
+        <div class="check-text"><b>Capa 04 · Facturación y Posicionamiento de Texo</b> — salud financiera del holding.</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="eyebrow-r">EL PRÓXIMO DESAFÍO</div>
+      <div class="title-r">Capa 3 · Datos Micro del Mercado (Tool X)</div>
+      <div class="body-r">Performance de campañas e inversión digital por anunciante.</div>
+      <div class="quote">
+        <p>El camino a Tool X empieza con una pregunta: <b>¿de dónde vienen los datos y cómo se unifican?</b> Ya tuvimos una primera aproximación con Ariel que dejó claro que las fuentes son múltiples y que la recolección es el desafío central. Antes de escribir una sola línea de código, necesitamos responder eso. La próxima etapa es una sesión de trabajo con los encargados del proyecto para mapear las fuentes disponibles, definir cómo se cruzan y establecer dónde viven los datos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ Nav ══ -->
   <nav class="nav">
-    <button id="prev" disabled aria-label="Anterior">&#8592;</button>
+    <button id="prev" disabled>&#8592;</button>
     <span class="counter" id="counter">1 / 7</span>
-    <button id="next" aria-label="Siguiente">&#8594;</button>
+    <button id="next">&#8594;</button>
   </nav>
 
   <script>
     const slides = document.querySelectorAll('.slide');
     const total = slides.length;
     let current = 0;
-
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
     const counter = document.getElementById('counter');
@@ -124,12 +563,10 @@
 
     prevBtn.addEventListener('click', () => { if (current > 0) goTo(current - 1); });
     nextBtn.addEventListener('click', () => { if (current < total - 1) goTo(current + 1); });
-
     document.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { if (current < total - 1) goTo(current + 1); }
       if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { if (current > 0) goTo(current - 1); }
     });
   </script>
-
 </body>
 </html>
